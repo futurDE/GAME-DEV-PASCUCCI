@@ -178,7 +178,9 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("keydown", (event) => {
     if (event.key == "ArrowLeft") {
-        if (checkEvent(message, event.key)) {
+        if (compareBoxAndWall2(boxPositionObject.bottom, wallDOMRect.top, wallDOMRect.bottom)) {
+            wallRightBarrier();
+        } else if (checkEvent(message, event.key)) {
             if (boxLeftPosition > firstContainerPositionObject.left) {
                 boxLeftPosition -= 2; //Subtract 2 from the box top position to move it upward
                 box.style.left = `${boxLeftPosition}px`
@@ -214,13 +216,26 @@ function compareBoxAndWall(boxBottom, wallTop, wallBottom) {
         if (compareBoxLeftAndWallLeft(boxPositionObject.left, wallPos.left)) {
             return true;
         }
-    } else {
-        return false;
     }
 }
+
+function compareBoxAndWall2(boxBottom, wallTop, wallBottom) {
+    if (boxBottom > wallTop && boxBottom < wallBottom) {
+        if (compareBoxRightAndWallLeft(boxPositionObject.right, wallPos.left)) {
+            return true;
+        }
+    }
+}
+
 //Function to check if box.left is less than wall.left
 function compareBoxLeftAndWallLeft(boxLeft, wallLeft) {
     if (boxLeft < wallLeft) {
+        return true;
+    }
+}
+
+function compareBoxRightAndWallLeft(boxRight, wallLeft) {
+    if (boxRight > wallLeft) {
         return true;
     }
 }
@@ -243,11 +258,19 @@ function wallLeftBarrier() {
 function wallRightBarrier() {
     if (boxLeftPosition > wallPos.right) {
         boxLeftPosition -= 2;
-        box.style.left = `${boxLeftPosition}`;
+        box.style.left = `${boxLeftPosition}px`;
     }
     box.left = boxLeftPosition;
     boxLeftPosition = boxPositionObject.left;
     boxRightPosition = boxPositionObject.right;
 
     updateDistance(newDistanceArray, newDistanceOnAllSides);
+}
+
+
+//Function to check .box is within .wall horizontal length
+function compareBoxAndWallHorizontalLength(boxBottom, boxRight, wallTop, wallLeft) {
+    if (boxRight > wallLeft && boxBottom < wallTop) {
+        return true;
+    }
 }
