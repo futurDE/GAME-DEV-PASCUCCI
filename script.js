@@ -155,7 +155,9 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("keydown", (event) => {
     if (event.key == "ArrowDown") {
-        if (checkEvent(message, event.key)) {
+        if (compareBoxAndWallHorizontalLength(boxPositionObject.top, boxPositionObject.right, wallDOMRect.top, wallDOMRect.left)) {
+            wallTopBarrier();
+        } else if (checkEvent(message, event.key)) {
             if (boxBottomPosition < firstContainerPositionObject.bottom) {
                 boxTopPosition += 2; //Subtract 2 from the box top position to move it upward
                 box.style.top = `${boxTopPosition}px`
@@ -263,6 +265,8 @@ function wallRightBarrier() {
     box.left = boxLeftPosition;
     boxLeftPosition = boxPositionObject.left;
     boxRightPosition = boxPositionObject.right;
+    boxTopPosition = boxPositionObject.top;
+    boxBottomPosition = boxPositionObject.bottom;
 
     updateDistance(newDistanceArray, newDistanceOnAllSides);
 }
@@ -273,4 +277,16 @@ function compareBoxAndWallHorizontalLength(boxBottom, boxRight, wallTop, wallLef
     if (boxRight > wallLeft && boxBottom < wallTop) {
         return true;
     }
+}
+
+function wallTopBarrier() {
+    if (boxBottomPosition < wallPos.top) {
+        boxTopPosition += 2;
+        box.style.top = `${boxTopPosition}px`;
+    }
+    box.top = boxTopPosition;
+    boxTopPosition = boxPositionObject.top;
+    boxBottomPosition = boxPositionObject.bottom;
+
+    updateDistance(newDistanceArray, newDistanceOnAllSides);
 }
