@@ -1,21 +1,20 @@
-document.addEventListener("keydown", (event) => {
-    if (event.key == "ArrowLeft") {
-        if (compareBoxAndWall2(boxPositionObject.bottom, wallDOMRect.top, wallDOMRect.bottom)) {
-            wallRightBarrier();
-        } else if (checkEvent(message, event.key)) {
-            if (boxLeftPosition > firstContainerPositionObject.left) {
-                boxLeftPosition -= 2; //Subtract 2 from the box top position to move it upward
-                box.style.left = `${boxLeftPosition}px`
-            }
-            box.top = boxLeftPosition; //Set the new top position
-
-            updateDistance(newDistanceArray, newDistanceOnAllSides);
-        } else {
-            boxLeftPosition -= 2; //Subtract 2 from the box top position to move it upward
-            box.style.left = `${boxLeftPosition}px`
-            box.left = boxLeftPosition; //Set the new top position
-
-            updateDistance(newDistanceArray, newDistanceOnAllSides);
+//Function to check the position of .box relative to .wall
+function compareBoxAndWall(boxBottom, wallTop, wallBottom) {
+    if (boxBottom > wallTop && boxBottom < wallBottom) { //condition to check if .box is within the vertical distance of .wall
+        if (compareBoxLeftAndWallLeft(boxPositionObject.left, wallPos.left)) {
+            return true;
         }
     }
-});
+}
+
+//Function to check if box.left is less than wall.left
+function compareBoxLeftAndWallLeft(boxLeft, wallLeft) {
+    if (boxLeft < wallLeft) {
+        return true;
+    }
+}
+
+
+
+
+(boxRight, wallLeft, wallRight)

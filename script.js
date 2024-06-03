@@ -106,7 +106,9 @@ function findClosestDistance(arr) { //Function to find the cloesest distance to 
 
 document.addEventListener("keydown", (event) => {
     if (event.key == "ArrowUp") {
-        if (checkEvent(message, event.key)) {
+        if (compareVerticalHeight(boxPositionObject.right, wallDOMRect.left, wallDOMRect.right)) {
+            wallBottomBarrier();
+        } else if (checkEvent(message, event.key)) {
             if (boxTopPosition > firstContainerPositionObject.top) {
                 boxTopPosition -= 2; //Subtract 2 from the box top position to move it upward
                 box.style.top = `${boxTopPosition}px`
@@ -282,6 +284,24 @@ function compareBoxAndWallHorizontalLength(boxBottom, boxRight, wallTop, wallLef
 function wallTopBarrier() {
     if (boxBottomPosition < wallPos.top) {
         boxTopPosition += 2;
+        box.style.top = `${boxTopPosition}px`;
+    }
+    box.top = boxTopPosition;
+    boxTopPosition = boxPositionObject.top;
+    boxBottomPosition = boxPositionObject.bottom;
+
+    updateDistance(newDistanceArray, newDistanceOnAllSides);
+}
+
+function compareVerticalHeight(boxRight, wallLeft, wallRight) {
+    if (boxRight > wallLeft && boxRight < wallRight) {
+        return true;
+    }
+}
+
+function wallBottomBarrier() {
+    if (boxTopPosition > wallPos.bottom) {
+        boxTopPosition -= 2;
         box.style.top = `${boxTopPosition}px`;
     }
     box.top = boxTopPosition;
