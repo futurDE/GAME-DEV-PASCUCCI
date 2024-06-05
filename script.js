@@ -48,7 +48,7 @@ function getDistanceBetweenRects() {
     console.log(`distanceBetweenRects: ${distanceBetweenRects}`);
 }
 getDistanceBetweenRects();
-s
+
 // Depending on the arrow key pressed, update the box's position:
 // After each move, update the box's DOMRect and global position variables
 document.addEventListener("keydown", (event) => {
