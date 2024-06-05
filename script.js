@@ -55,7 +55,7 @@ document.addEventListener("keydown", (event) => {
     switch (event.key) {
         case "ArrowUp":
             wallBottomBarrierConditions();
-            if (tr3 == true) {
+            if (wallBottomCollisionCondition == true) {
                 wallBottomBarrier();
             } else {
                 moveBox();
@@ -63,7 +63,7 @@ document.addEventListener("keydown", (event) => {
             break;
         case "ArrowRight":
             wallLeftBarrierConditions();
-            if (truthiness == true) {
+            if (wallLeftCollisionCondition == true) {
                 wallLeftBarrier();
             } else {
                 moveBox();
@@ -71,7 +71,7 @@ document.addEventListener("keydown", (event) => {
             break;
         case "ArrowDown":
             wallTopBarrierConditions();
-            if (tr2 == true) {
+            if (wallTopCollisionCondition == true) {
                 wallTopBarrier();
             } else {
                 moveBox();
@@ -79,7 +79,7 @@ document.addEventListener("keydown", (event) => {
             break;
         case "ArrowLeft":
             wallRightBarrierConditions();
-            if (tr1 == true) {
+            if (wallRightCollisionCondition == true) {
                 wallRightBarrier();
             } else {
                 moveBox();
@@ -88,22 +88,22 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-//How do I use only one variable (truthiness) to check wall collision conditions?
-//Don't want to use tr1, don't want to use tr2, and don't want to use tr3
-let truthiness = false;
-let tr1 = false;
-let tr2 = false;
-let tr3 = false;
+//How do I use only one variable (wallLeftCollisionCondition) to check wall collision conditions?
+//Don't want to use wallRightCollisionCondition, don't want to use wallTopCollisionCondition, and don't want to use wallBottomCollisionCondition
+let wallLeftCollisionCondition = false;
+let wallRightCollisionCondition = false;
+let wallTopCollisionCondition = false;
+let wallBottomCollisionCondition = false;
 //Conditions for the wall left barrier
 function wallLeftBarrierConditions() {
     if (boxBottom > wallDOMRect.top && boxBottom < wallDOMRect.bottom) {
         if (boxRight < wallDOMRect.left) {
-            truthiness = true;
+            wallLeftCollisionCondition = true;
         }
     } else {
-        truthiness = false;
+        wallLeftCollisionCondition = false;
     }
-    console.log(truthiness);
+    console.log(wallLeftCollisionCondition);
 }
 
 function wallLeftBarrier() {
@@ -119,12 +119,12 @@ function wallLeftBarrier() {
 function wallRightBarrierConditions() {
     if (boxBottom > wallDOMRect.top && boxBottom < wallDOMRect.bottom) {
         if (boxLeft > wallDOMRect.right && boxLeft > wallDOMRect.left) {
-            tr1 = true;
+            wallRightCollisionCondition = true;
         }
     } else {
-        tr1 = false;
+        wallRightCollisionCondition = false;
     }
-    console.log(truthiness);
+    console.log(wallLeftCollisionCondition);
 }
 
 function wallRightBarrier() {
@@ -141,10 +141,10 @@ function wallRightBarrier() {
 function wallTopBarrierConditions() {
     if (boxRight > wallDOMRect.left && boxLeft < wallDOMRect.right) {
         if (boxBottom < wallDOMRect.top) {
-            tr2 = true;
+            wallTopCollisionCondition = true;
         }
     } else {
-        tr2 = false;
+        wallTopCollisionCondition = false;
     }
 }
 
@@ -161,10 +161,10 @@ function wallTopBarrier() {
 function wallBottomBarrierConditions() {
     if (boxRight > wallDOMRect.left && boxLeft < wallDOMRect.right) {
         if (boxTop > wallDOMRect.bottom) {
-            tr3 = true;
+            wallBottomCollisionCondition = true;
         }
     } else {
-        tr3 = false;
+        wallBottomCollisionCondition = false;
     }
 }
 
