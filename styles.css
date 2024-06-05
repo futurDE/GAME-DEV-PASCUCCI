@@ -1,27 +1,26 @@
-.first-container {
+.outer-square {
+    border: 1px solid black;
     width: 500px;
     height: 500px;
     margin: auto;
-    border: 1px solid black;
 }
 
 .box {
+    border: 1px solid black;
     width: 10px;
     height: 10px;
-    border: 1px solid black;
     background-color: black;
-    margin: auto;
     position: absolute;
     top: 253px;
     left: 794px;
 }
 
 .wall {
-    width: 20px;
-    height: 150px;
     border: 1px solid black;
+    width: 15px;
+    height: 200px;
     background-color: black;
     position: absolute;
-    top: 100px;
-    left: 900px;
+    top: 170px;
+    left: 890px;
 }
